@@ -1,9 +1,8 @@
 import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import * as UserActions from '../../store/ducks/users/actions';
-import Dashboard from '../Dashboard';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -18,26 +17,11 @@ const SignIn = () => {
   const classes = useStyles();
 
   const [authorized, setAuthorized] = useState(false);
-  const nameInput = useRef<HTMLInputElement>(null)
-  const emailInput = useRef<HTMLInputElement>(null)
-  const passwordInput = useRef<HTMLInputElement>(null)
 
   const loginEmail = useRef<HTMLInputElement>(null)
   const loginPassword = useRef<HTMLInputElement>(null)
 
   const dispatch = useDispatch();
-
-  const submitSignUp = async () => {
-
-    const request = {
-      name: nameInput?.current?.value,
-      email: emailInput?.current?.value,
-      password: passwordInput?.current?.value
-    }
-
-    dispatch(UserActions.signUpRequest(request))
-    console.log('data signup', request)
-  }
 
   const submitLogin = async () => {
 
@@ -52,7 +36,6 @@ const SignIn = () => {
     } catch (e) {
       console.log(e)
     }
-
   }
 
   return (
@@ -110,36 +93,6 @@ const SignIn = () => {
         </Container>
       </Box>
     </div>
-
-
-
-
-    // <>
-    //   <div>
-    //     <div className="navbar">
-    //       <Link to="/dashboard">Dashboard</Link>
-    //       <Link to="/currency">Currency</Link>
-    //       <Link to="/finances">Finances</Link>
-    //     </div>
-    //     <div className="sign-up">
-    //       <strong>Cadastre-se</strong>
-    //       <input type="text" placeholder="Nome" ref={nameInput} />
-    //       <input type="text" placeholder="E-mail" ref={emailInput} />
-    //       <input type="password" placeholder="Senha" ref={passwordInput} />
-    //       <button type="button" onClick={submitSignUp}>Cadastrar</button>
-    //     </div>
-
-    //     <div className="login">
-    //       <strong>Já tem cadastro? Faça seu login</strong>
-    //       <input type="text" placeholder="E-mail" ref={loginEmail} />
-    //       <input type="password" placeholder="Senha" ref={loginPassword} />
-    //       <button type="button" onClick={submitLogin}>Entrar</button>
-    //     </div>
-
-
-
-    //   </div>
-    // </>
   )
 }
 
