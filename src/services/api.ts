@@ -4,4 +4,4 @@ const api = axios.create({
   baseURL: 'http://localhost:4000'
 })
 
-export { api };
+export default api;

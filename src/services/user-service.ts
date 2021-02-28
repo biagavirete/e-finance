@@ -1,12 +1,8 @@
-import axios from "axios";
-
-const userApi = axios.create({
-  baseURL: 'http://localhost:4000'
-})
+import api from './api';
 
 const UserService = {
-  postSignUp: (signUpData: any) => userApi.post('/register', signUpData),
-  postLogin: (loginData: any) => userApi.post('/login', loginData)
+  postSignUp: (signUpData: any) => api.post('/register', signUpData),
+  postLogin: (loginData: any) => api.post('/login', loginData)
 }
 
 export default UserService;
