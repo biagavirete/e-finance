@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
 import NavBar from '../../components/NavBar';
 import { Link as RouterLink, } from 'react-router-dom';
-import { Box, Button, Card, CardContent, CardHeader, Divider, FormControlLabel, Grid, Typography, makeStyles, Container, Radio, RadioGroup, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Divider, Grid, Typography, makeStyles, Container, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core';
+import { ArrowLeft } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -160,12 +161,15 @@ function Currency() {
               >
                 <Button
                   color="primary"
-                  variant="contained"
+                  startIcon={<ArrowLeft />}
+                  size="small"
+                  variant="text"
                   component={RouterLink}
                   to="/dashboard"
                 >
                   Voltar para o dashboard
-          </Button>
+                  </Button>
+
               </Box>
             </Card>
           </Box>
