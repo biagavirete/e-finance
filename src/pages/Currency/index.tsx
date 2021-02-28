@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
 import NavBar from '../../components/NavBar';
 import { Link as RouterLink, } from 'react-router-dom';
-import { Box, Button, Card, CardContent, CardHeader, Divider, FormControlLabel, Grid, Typography, makeStyles, Container, Radio, RadioGroup } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Divider, FormControlLabel, Grid, Typography, makeStyles, Container, Radio, RadioGroup, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme: any) => ({
   item: {
     display: 'flex',
     flexDirection: 'column'
-  }
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));
 
 function Currency() {
@@ -23,7 +27,7 @@ function Currency() {
 
   const [selectedCurrency, setSelectedCurrency] = useState('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedCurrency((event.target as HTMLInputElement).value);
   };
 
@@ -35,7 +39,7 @@ function Currency() {
   }, [])
 
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
-  const { currency_code, name, symbol, country_code, central_bank } = useSelector((state: any) => state.currency.data)
+  const { currency_code, name, country_name, symbol, country_code, central_bank } = useSelector((state: any) => state.currency.data)
   const currencyArray = Object.values(responseCurrency);
 
   const getSelectedCurrencyData = (param: any) => {
@@ -79,11 +83,20 @@ function Currency() {
                   sm={6}
                   xs={12}
                 >
-                  {currencyArray !== undefined && currencyArray.map((currency: any) => (
-                    <RadioGroup aria-label="currency" name="gender1" value={selectedCurrency} onChange={handleChange}>
-                      <FormControlLabel value={currency.currency_code} control={<Radio />} label={currency.name} />
-                    </RadioGroup>
-                  ))}
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Moedas</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-outlined-label"
+                      id="demo-simple-select-outlined"
+                      value={selectedCurrency}
+                      onChange={handleChange}
+                      label="Moedas"
+                    >
+                      {currencyArray !== undefined && currencyArray.map((currency: any) => (
+                        <MenuItem value={currency.currency_code}>{currency.name}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
               </Grid>
             </CardContent>
@@ -115,21 +128,21 @@ function Currency() {
                   gutterBottom
                   variant="h4"
                 >
-                  Moeda: {currency_code}
+                  Moeda: {name} - {currency_code}
                 </Typography>
                 <Typography
                   color="textPrimary"
                   gutterBottom
                   variant="h5"
                 >
-                  {name} - {country_code}
+                  País: {country_name} ({country_code})
                 </Typography>
                 <Typography
                   color="textPrimary"
                   gutterBottom
                   variant="h5"
                 >
-                  Símbolo - {symbol}
+                  Símbolo: {symbol}
                 </Typography>
                 <Typography
                   color="textPrimary"
