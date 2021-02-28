@@ -1,13 +1,11 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { Link as RouterLink, } from 'react-router-dom';
 
-const useStyles = makeStyles((theme: Theme) =>
+import Logo from '../../assets/logo.svg';
+
+const useStyles = makeStyles((theme: any) =>
   createStyles({
     root: {
       flexGrow: 1,
@@ -17,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
+      paddingLeft: 10
     },
   }),
 );
@@ -26,15 +25,17 @@ export default function NavigationBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0}>
+      <AppBar position="fixed" elevation={0}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <img src={Logo} alt="logo" width={40} height={40} />
+          <Typography variant="h4" className={classes.title}>
             e-Finances
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to="/login"
+          >Login</Button>
         </Toolbar>
       </AppBar>
     </div>
