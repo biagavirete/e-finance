@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles, Typography } from '@material-ui/core';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import { Add, List } from '@material-ui/icons';
 import NavBar from '../../components/NavBar';
+import { Link as RouterLink, } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -35,6 +37,7 @@ function Finances() {
               >
                 <CardHeader
                   title="Finanças"
+                  subheader="Administre suas finanças"
                 />
                 <Divider />
                 <CardContent>
@@ -42,7 +45,33 @@ function Finances() {
                     height={400}
                     position="relative"
                   >
-                    <p>Texto</p>
+                    <Typography
+                      color="textPrimary"
+                      gutterBottom
+                      variant="h5"
+                    >
+                      Selecione abaixo:
+                </Typography>
+                    <Button
+                      color="primary"
+                      startIcon={<Add />}
+                      size="large"
+                      variant="text"
+                      component={RouterLink}
+                      to="/newtransaction"
+                    >
+                      Cadastrar
+                  </Button>
+                    <Button
+                      color="primary"
+                      startIcon={<List />}
+                      size="large"
+                      variant="text"
+                      component={RouterLink}
+                      to="/transactionslist"
+                    >
+                      Listar
+                  </Button>
                   </Box>
                 </CardContent>
                 <Divider />
@@ -56,6 +85,8 @@ function Finances() {
                     startIcon={<ArrowLeftIcon />}
                     size="small"
                     variant="text"
+                    component={RouterLink}
+                    to="/dashboard"
                   >
                     Voltar para o dashboard
                   </Button>
