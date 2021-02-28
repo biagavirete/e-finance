@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootSaga from './ducks/rootSaga';
 import reducerCurrency from './ducks/currency';
 import reducerUser from './ducks/users';
+import reducerFinance from './ducks/finances';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +14,8 @@ const middlewares = [
 
 const createRootReducer = () => combineReducers({
   currency: reducerCurrency,
-  users: reducerUser
+  users: reducerUser,
+  finance: reducerFinance
 })
 
 const store = createStore(createRootReducer(), composeWithDevTools(applyMiddleware(...middlewares)));
