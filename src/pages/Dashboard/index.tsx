@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink, } from 'react-router-dom';
-import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles, Typography } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import NavBar from '../../components/NavBar';
 
@@ -40,10 +40,30 @@ function Dashboard() {
                 <Divider />
                 <CardContent>
                   <Box
-                    height={400}
+                    height={100}
                     position="relative"
                   >
-                    <p>Texto</p>
+                    <Typography
+                      color="textPrimary"
+                      gutterBottom
+                      variant="h2"
+                    >
+                      Bem-vindo!
+                </Typography>
+                    <Typography
+                      color="textPrimary"
+                      gutterBottom
+                      variant="h5"
+                    >
+                      Aqui você poderá administrar suas finanças.
+                </Typography>
+                    <Typography
+                      color="textPrimary"
+                      gutterBottom
+                      variant="h5"
+                    >
+                      Navegue pelo menu ao lado ou clique no botão abaixo para ver suas finanças.
+                </Typography>
                   </Box>
                 </CardContent>
                 <Divider />
