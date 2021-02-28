@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as UserActions from '../../store/ducks/users/actions';
@@ -17,13 +17,12 @@ const useStyles = makeStyles((theme: any) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const [defaultValue, setDefaultValue] = useState('');
-
   const nameInput = useRef<HTMLInputElement>(null)
   const emailInput = useRef<HTMLInputElement>(null)
   const passwordInput = useRef<HTMLInputElement>(null)
 
   const dispatch = useDispatch();
+  const { error, success } = useSelector((state: any) => state.users)
 
   const submitSignUp = async () => {
 
@@ -35,21 +34,16 @@ const Home = () => {
 
     try {
       dispatch(UserActions.signUpRequest(request))
-      console.log('o que vai no signup', request)
-      setDefaultValue('');
+      if (error) {
+        toast.error('Ocorreu um erro, tente novamente')
+      }
+
+      if (success) {
+        toast.success('Cadastro realizado. Faça o login para continuar')
+      }
     } catch (e) {
       console.log(e);
     }
-  }
-
-  const { error, success } = useSelector((state: any) => state.users)
-
-  if (error) {
-    toast.error('Ocorreu um erro, tente novamente')
-  }
-
-  if (success) {
-    toast.success('Cadastro realizado. Faça o login para continuar')
   }
 
   return (
@@ -83,7 +77,6 @@ const Home = () => {
             margin="normal"
             variant="outlined"
             required
-            defaultValue={defaultValue}
             inputRef={nameInput}
           />
           <TextField
@@ -93,7 +86,6 @@ const Home = () => {
             type="email"
             variant="outlined"
             required
-            defaultValue={defaultValue}
             inputRef={emailInput}
 
           />
@@ -105,7 +97,6 @@ const Home = () => {
             variant="outlined"
             required
             helperText="No mínimo 6 dígitos"
-            defaultValue={defaultValue}
             inputRef={passwordInput}
           />
 
