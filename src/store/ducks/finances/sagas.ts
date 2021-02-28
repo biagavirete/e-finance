@@ -16,7 +16,6 @@ export function* getTransactions() {
   try {
     const response: AxiosResponse = yield call(FinancesService.getTransactions);
     yield put(getTransactionsSuccess(response.data))
-    console.log('saga gettransactions', response.data)
   } catch (err) {
     console.log(err)
     yield put(getTransactionsFailure())
@@ -27,7 +26,6 @@ export function* postTransaction(action: any) {
   try {
     const response: AxiosResponse = yield call(FinancesService.postTransaction, action.payload);
     yield put(postTransactionsSuccess(response.data))
-    console.log('saga posttransactions', response.data)
   } catch (err) {
     console.log(err)
     yield put(postTransactionsFailure())

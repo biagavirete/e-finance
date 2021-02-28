@@ -10,8 +10,6 @@ export function* getCurrency(action: any) {
     const response: AxiosResponse = yield call(CurrencyService.getCurrency, action.payload);
     const details = Object.values(response.data);
     yield put(loadCurrencySuccess(details[0]))
-    console.log('saga getcurrency', details[0])
-    console.log('details', details)
   } catch (err) {
     console.log(err)
     yield put(loadCurrencyFailure())

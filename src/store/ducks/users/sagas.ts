@@ -7,7 +7,6 @@ import { loginFailure, loginSuccess, signUpFailure, signUpSuccess } from './acti
 export function* postSignUp(action: any) {
   try {
     const response: AxiosResponse = yield call(UserService.postSignUp, action.payload);
-    console.log('saga cadastro', response)
     yield put(signUpSuccess(response.data))
   } catch (err) {
     console.log(err)
@@ -19,7 +18,6 @@ export function* postLogin(action: any) {
   try {
     const response: AxiosResponse = yield call(UserService.postLogin, action.payload);
     localStorage.setItem('token', response.data.accessToken);
-    console.log('saga login', response)
     yield put(loginSuccess(response.data))
   } catch (err) {
     console.log(err)
