@@ -2,8 +2,46 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
 
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  Grid,
+  Typography,
+  makeStyles,
+  TextField,
+  Container,
+  Radio,
+  RadioGroup
+} from '@material-ui/core';
+import NavBar from '../../components/NavBar';
+
+const useStyles = makeStyles((theme: any) => ({
+  root: {
+    backgroundColor: theme.palette.background.dark,
+    height: '100%',
+    paddingBottom: theme.spacing(12),
+    paddingTop: theme.spacing(12)
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}));
+
 function Currency() {
+  const classes = useStyles();
+
   const [selectedCurrency, setSelectedCurrency] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCurrency((event.target as HTMLInputElement).value);
+  };
 
   const dispatch = useDispatch();
 
@@ -15,7 +53,7 @@ function Currency() {
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
   const currencyArray = Object.values(responseCurrency);
 
-  const selectCurrency = (param: any) => {
+  const getSelectedCurrencyData = (param: any) => {
     setSelectedCurrency(param);
     console.log('selected currency', selectedCurrency)
     if (selectedCurrency !== '') {
@@ -33,26 +71,85 @@ function Currency() {
 
   return (
     <>
-      <div className="countries">
-        <h1>Moedas</h1>
-        {currencyArray !== undefined && currencyArray.map((currency: any) => (
-          <ul>
-            <li key={currency.country_code}>
-              <h3 onClick={() => selectCurrency(currency.currency_code)} >{currency.name}</h3>
-              <p><strong>{currency.currency_code}</strong> - {currency.symbol}</p>
-            </li>
-          </ul>
-        ))}
-      </div>
+      <NavBar />
+      <div className={classes.root}>
+        <Container maxWidth="lg">
+          <Card>
+            <CardHeader
+              subheader="Selecione a moeda de sua preferência"
+              title="Moedas"
+            />
+            <Divider />
+            <CardContent>
+              <Grid
+                container
+                spacing={6}
+                wrap="wrap"
+              >
+                <Grid
+                  className={classes.item}
+                  item
+                  md={4}
+                  sm={6}
+                  xs={12}
+                >
+                  {currencyArray !== undefined && currencyArray.map((currency: any) => (
+                    <RadioGroup aria-label="currency" name="gender1" value={selectedCurrency} onChange={handleChange}>
+                      <FormControlLabel value={currency.currency_code} control={<Radio />} label={currency.name} />
+                    </RadioGroup>
+                  ))}
+                </Grid>
+              </Grid>
+            </CardContent>
+            <Divider />
+            <Box
+              display="flex"
+              justifyContent="flex-end"
+              p={2}
+            >
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={getSelectedCurrencyData}
+              >
+                Selecionar
+          </Button>
+            </Box>
+          </Card>
+          <Box mt={3}>
+            <Card>
+              <CardHeader
+                subheader="Informaçẽos sobre a moeda selecionada"
+                title="Detalhes"
+              />
+              <Divider />
+              <CardContent>
+                <Typography
+                  color="textPrimary"
+                  gutterBottom
+                  variant="h6"
+                >
+                  Moedas
+              </Typography>
+              </CardContent>
+              <Divider />
+              <Box
+                display="flex"
+                justifyContent="flex-end"
+                p={2}
+              >
+                <Button
+                  color="primary"
+                  variant="contained"
+                >
+                  Update
+          </Button>
+              </Box>
+            </Card>
+          </Box>
+        </Container>
 
-      {/* <div className="selected-country-info">
-        {selectedCurrency !== undefined ? (
-          <>
-            <h1>Você escolheu: {currencyDataArray[0].country_name} ({currencyDataArray[0].country_code})</h1>
-            <p><strong>{currencyDataArray[0].currency_code} - {currencyDataArray[0].symbol}</strong></p>
-          </>
-        ) : null}
-      </div> */}
+      </div>
     </>
   )
 }
