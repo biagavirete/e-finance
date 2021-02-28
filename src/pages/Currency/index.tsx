@@ -1,25 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
-
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Checkbox,
-  Divider,
-  FormControlLabel,
-  Grid,
-  Typography,
-  makeStyles,
-  TextField,
-  Container,
-  Radio,
-  RadioGroup
-} from '@material-ui/core';
 import NavBar from '../../components/NavBar';
+import { Link as RouterLink, } from 'react-router-dom';
+import { Box, Button, Card, CardContent, CardHeader, Divider, FormControlLabel, Grid, Typography, makeStyles, Container, Radio, RadioGroup } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -68,6 +52,7 @@ function Currency() {
   const currencyData = useSelector((state: any) => state.currency.data)
   console.log('currency data', currencyData)
   const currencyDataArray: any = Object.values(currencyData)
+  console.log('currencyDataArray', currencyDataArray)
 
   return (
     <>
@@ -119,7 +104,7 @@ function Currency() {
           <Box mt={3}>
             <Card>
               <CardHeader
-                subheader="Informaçẽos sobre a moeda selecionada"
+                subheader="Informações sobre a moeda selecionada"
                 title="Detalhes"
               />
               <Divider />
@@ -127,10 +112,31 @@ function Currency() {
                 <Typography
                   color="textPrimary"
                   gutterBottom
-                  variant="h6"
+                  variant="h4"
                 >
-                  Moedas
-              </Typography>
+                  Moeda: {currencyDataArray[0].currency_code}
+                </Typography>
+                <Typography
+                  color="textPrimary"
+                  gutterBottom
+                  variant="h5"
+                >
+                  {currencyDataArray[0].name} - {currencyDataArray[0].country_code}
+                </Typography>
+                <Typography
+                  color="textPrimary"
+                  gutterBottom
+                  variant="h5"
+                >
+                  Símbolo - {currencyDataArray[0].symbol}
+                </Typography>
+                <Typography
+                  color="textPrimary"
+                  gutterBottom
+                  variant="h5"
+                >
+                  Banco central - <a href={currencyDataArray[0].central_bank} >Clique aqui para visitar o site</a>
+                </Typography>
               </CardContent>
               <Divider />
               <Box
@@ -141,8 +147,10 @@ function Currency() {
                 <Button
                   color="primary"
                   variant="contained"
+                  component={RouterLink}
+                  to="/dashboard"
                 >
-                  Update
+                  Voltar para o dashboard
           </Button>
               </Box>
             </Card>
