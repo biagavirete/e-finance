@@ -42,7 +42,7 @@ function Finances() {
                 <Divider />
                 <CardContent>
                   <Box
-                    height={400}
+                    height={100}
                     position="relative"
                   >
                     <Typography
