@@ -1,8 +1,9 @@
 import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as UserActions from '../../store/ducks/users/actions';
+import { toast, Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -32,14 +33,21 @@ const SignIn = () => {
 
     try {
       dispatch(UserActions.loginRequest(request))
-      setAuthorized(true);
+      setAuthorized(true)
     } catch (e) {
       console.log(e)
     }
   }
 
+  const { error } = useSelector((state: any) => state.users);
+
+  if (error) {
+    toast.error('Não foi possível realizar o login')
+  }
+
   return (
     <div className={classes.root}>
+      <Toaster />
       <Box
         display="flex"
         flexDirection="column"
@@ -68,6 +76,7 @@ const SignIn = () => {
             margin="normal"
             type="email"
             variant="outlined"
+            inputRef={loginEmail}
           />
           <TextField
             fullWidth
@@ -75,6 +84,7 @@ const SignIn = () => {
             margin="normal"
             type="password"
             variant="outlined"
+            inputRef={loginPassword}
           />
 
           <Box my={2}>
@@ -89,7 +99,7 @@ const SignIn = () => {
               Entrar
                   </Button>
           </Box>
-          {authorized && <Redirect to="/Dashboard" />}
+          {authorized && <Redirect to="/dashboard" />}
         </Container>
       </Box>
     </div>

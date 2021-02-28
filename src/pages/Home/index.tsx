@@ -1,9 +1,9 @@
-import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as UserActions from '../../store/ducks/users/actions';
-import Dashboard from '../Dashboard';
+import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
+import { toast, Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -17,13 +17,11 @@ const useStyles = makeStyles((theme: any) => ({
 const Home = () => {
   const classes = useStyles();
 
-  const [authorized, setAuthorized] = useState(false);
+  const [defaultValue, setDefaultValue] = useState('');
+
   const nameInput = useRef<HTMLInputElement>(null)
   const emailInput = useRef<HTMLInputElement>(null)
   const passwordInput = useRef<HTMLInputElement>(null)
-
-  const loginEmail = useRef<HTMLInputElement>(null)
-  const loginPassword = useRef<HTMLInputElement>(null)
 
   const dispatch = useDispatch();
 
@@ -35,28 +33,28 @@ const Home = () => {
       password: passwordInput?.current?.value
     }
 
-    dispatch(UserActions.signUpRequest(request))
-    console.log('data signup', request)
+    try {
+      dispatch(UserActions.signUpRequest(request))
+      console.log('o que vai no signup', request)
+      setDefaultValue('');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  const submitLogin = async () => {
+  const { error, success } = useSelector((state: any) => state.users)
 
-    const request = {
-      email: loginEmail.current?.value,
-      password: loginPassword.current?.value
-    }
+  if (error) {
+    toast.error('Ocorreu um erro, tente novamente')
+  }
 
-    try {
-      dispatch(UserActions.loginRequest(request))
-      setAuthorized(true);
-    } catch (e) {
-      console.log(e)
-    }
-
+  if (success) {
+    toast.success('Cadastro realizado. Faça o login para continuar')
   }
 
   return (
     <div className={classes.root}>
+      <Toaster />
       <Box
         display="flex"
         flexDirection="column"
@@ -84,6 +82,9 @@ const Home = () => {
             label="Nome"
             margin="normal"
             variant="outlined"
+            required
+            defaultValue={defaultValue}
+            inputRef={nameInput}
           />
           <TextField
             fullWidth
@@ -91,6 +92,10 @@ const Home = () => {
             margin="normal"
             type="email"
             variant="outlined"
+            required
+            defaultValue={defaultValue}
+            inputRef={emailInput}
+
           />
           <TextField
             fullWidth
@@ -98,7 +103,10 @@ const Home = () => {
             margin="normal"
             type="password"
             variant="outlined"
+            required
             helperText="No mínimo 6 dígitos"
+            defaultValue={defaultValue}
+            inputRef={passwordInput}
           />
 
           <Box my={2}>
@@ -128,36 +136,6 @@ const Home = () => {
         </Container>
       </Box>
     </div>
-
-
-
-
-    // <>
-    //   <div>
-    //     <div className="navbar">
-    //       <Link to="/dashboard">Dashboard</Link>
-    //       <Link to="/currency">Currency</Link>
-    //       <Link to="/finances">Finances</Link>
-    //     </div>
-    //     <div className="sign-up">
-    //       <strong>Cadastre-se</strong>
-    //       <input type="text" placeholder="Nome" ref={nameInput} />
-    //       <input type="text" placeholder="E-mail" ref={emailInput} />
-    //       <input type="password" placeholder="Senha" ref={passwordInput} />
-    //       <button type="button" onClick={submitSignUp}>Cadastrar</button>
-    //     </div>
-
-    //     <div className="login">
-    //       <strong>Já tem cadastro? Faça seu login</strong>
-    //       <input type="text" placeholder="E-mail" ref={loginEmail} />
-    //       <input type="password" placeholder="Senha" ref={loginPassword} />
-    //       <button type="button" onClick={submitLogin}>Entrar</button>
-    //     </div>
-
-    //     {authorized && <Redirect to="/Dashboard" />}
-
-    //   </div>
-    // </>
   )
 }
 
