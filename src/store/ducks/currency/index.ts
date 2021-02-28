@@ -3,6 +3,7 @@ import { CurrencyTypes, CurrencyState } from './types';
 
 const INITIAL_STATE: CurrencyState = {
   data: {},
+  currencyDetails: [],
   loadingCurrency: false,
   currenciesList: {},
 }

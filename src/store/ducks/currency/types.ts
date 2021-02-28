@@ -8,8 +8,16 @@ export enum CurrencyTypes {
   GET_CURRENCIESLIST_FAILURE = '@currency/GET_CURRENCIESLIST_FAILURE',
 }
 
+export interface CurrencyDetails {
+  currency_code: string;
+  country_code: string;
+  name: string;
+  symbol: string;
+}
+
 export interface CurrencyState {
   readonly data: object;
   readonly loadingCurrency: boolean;
   readonly currenciesList: object;
+  readonly currencyDetails: any;
 }

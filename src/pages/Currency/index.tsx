@@ -35,6 +35,7 @@ function Currency() {
   }, [])
 
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
+  const { currency_code, name, symbol, country_code, central_bank } = useSelector((state: any) => state.currency.data)
   const currencyArray = Object.values(responseCurrency);
 
   const getSelectedCurrencyData = (param: any) => {
@@ -114,28 +115,28 @@ function Currency() {
                   gutterBottom
                   variant="h4"
                 >
-                  Moeda: {currencyDataArray[0].currency_code}
+                  Moeda: {currency_code}
                 </Typography>
                 <Typography
                   color="textPrimary"
                   gutterBottom
                   variant="h5"
                 >
-                  {currencyDataArray[0].name} - {currencyDataArray[0].country_code}
+                  {name} - {country_code}
                 </Typography>
                 <Typography
                   color="textPrimary"
                   gutterBottom
                   variant="h5"
                 >
-                  Símbolo - {currencyDataArray[0].symbol}
+                  Símbolo - {symbol}
                 </Typography>
                 <Typography
                   color="textPrimary"
                   gutterBottom
                   variant="h5"
                 >
-                  Banco central - <a href={currencyDataArray[0].central_bank} >Clique aqui para visitar o site</a>
+                  Banco central - <a href={central_bank} >Clique aqui para visitar o site</a>
                 </Typography>
               </CardContent>
               <Divider />
