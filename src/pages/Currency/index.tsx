@@ -3,7 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
 import NavBar from '../../components/NavBar';
 import { Link as RouterLink, } from 'react-router-dom';
-import { Box, Button, Card, CardContent, CardHeader, Divider, Grid, Typography, makeStyles, Container, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  Grid,
+  Typography,
+  makeStyles,
+  Container,
+  InputLabel,
+  Select,
+  FormControl,
+  MenuItem
+} from '@material-ui/core';
 import { ArrowLeft } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: any) => ({
@@ -40,12 +55,17 @@ function Currency() {
   }, [])
 
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
-  const { currency_code, name, country_name, symbol, country_code, central_bank } = useSelector((state: any) => state.currency.data)
+  const {
+    currency_code,
+    name,
+    country_name,
+    symbol,
+    country_code,
+    central_bank } = useSelector((state: any) => state.currency.data)
   const currencyArray = Object.values(responseCurrency);
 
   const getSelectedCurrencyData = (param: any) => {
     setSelectedCurrency(param);
-    console.log('selected currency', selectedCurrency)
     if (selectedCurrency !== '') {
       try {
         dispatch(CurrencyActions.loadCurrencyRequest(selectedCurrency))
@@ -54,11 +74,6 @@ function Currency() {
       }
     }
   }
-
-  const currencyData = useSelector((state: any) => state.currency.data)
-  console.log('currency data', currencyData)
-  const currencyDataArray: any = Object.values(currencyData)
-  console.log('currencyDataArray', currencyDataArray)
 
   return (
     <>
