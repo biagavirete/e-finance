@@ -1,10 +1,11 @@
 import { Reducer } from "redux";
-import { FinanceTypes, FinanceState } from './types';
+import { FinanceTypes } from './types';
 
 const INITIAL_STATE: any = {
   transactions: [],
   loading: false,
   error: false,
+  success: false,
 }
 
 const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
@@ -26,6 +27,7 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+        success: true,
         data: action.payload
       }
     case FinanceTypes.POST_TRANSACTION_FAILURE:
