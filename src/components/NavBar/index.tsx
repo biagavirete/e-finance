@@ -1,14 +1,6 @@
 import React from 'react';
 import { Link as RouterLink, } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  Drawer,
-  Hidden,
-  List,
-  makeStyles,
-  ListItem,
-} from '@material-ui/core';
+import { Box, Button, Drawer, Hidden, List, makeStyles, ListItem } from '@material-ui/core';
 import {
   Dashboard as DashboardIcon,
   Lock as LockIcon,
@@ -16,34 +8,6 @@ import {
   MonetizationOn as MoneyIcon,
   PersonAdd as PersonAddIcon,
 } from '@material-ui/icons';
-
-// const items = [
-//   {
-//     href: '/dashboard',
-//     icon: DashboardIcon,
-//     title: 'Dashboard'
-//   },
-//   {
-//     href: '/currency',
-//     icon: EuroIcon,
-//     title: 'Moedas'
-//   },
-//   {
-//     href: '/finances',
-//     icon: MoneyIcon,
-//     title: 'Finanças'
-//   },
-//   {
-//     href: '/login',
-//     icon: LockIcon,
-//     title: 'Login'
-//   },
-//   {
-//     href: '/',
-//     icon: PersonAddIcon,
-//     title: 'Cadastro'
-//   },
-// ];
 
 const useStyles = makeStyles((theme) => ({
   desktopDrawer: {
@@ -97,14 +61,12 @@ const NavBar = () => {
             disableGutters
           >
             <Button
-              // activeClassName={classes.active}
               className={classes.button}
               component={RouterLink}
-              to="/"
+              to="/dashboard"
             >
               <DashboardIcon
                 className={classes.icon}
-              // size="20"
               />
               <span className={classes.title}>
                 Dashboard
@@ -116,14 +78,12 @@ const NavBar = () => {
             disableGutters
           >
             <Button
-              // activeClassName={classes.active}
               className={classes.button}
               component={RouterLink}
               to="/currency"
             >
               <EuroIcon
                 className={classes.icon}
-              // size="20"
               />
               <span className={classes.title}>
                 Moedas
@@ -135,14 +95,12 @@ const NavBar = () => {
             disableGutters
           >
             <Button
-              // activeClassName={classes.active}
               className={classes.button}
               component={RouterLink}
               to="/finances"
             >
               <MoneyIcon
                 className={classes.icon}
-              // size="20"
               />
               <span className={classes.title}>
                 Finanças
@@ -154,14 +112,12 @@ const NavBar = () => {
             disableGutters
           >
             <Button
-              // activeClassName={classes.active}
               className={classes.button}
               component={RouterLink}
               to="/login"
             >
               <LockIcon
                 className={classes.icon}
-              // size="20"
               />
               <span className={classes.title}>
                 Login
@@ -173,14 +129,12 @@ const NavBar = () => {
             disableGutters
           >
             <Button
-              // activeClassName={classes.active}
               className={classes.button}
               component={RouterLink}
               to="/"
             >
               <PersonAddIcon
                 className={classes.icon}
-              // size="20"
               />
               <span className={classes.title}>
                 Cadastro
