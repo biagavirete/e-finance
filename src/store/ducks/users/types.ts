@@ -15,6 +15,8 @@ export interface Users {
 
 export interface UserState {
   readonly loading: boolean;
+  readonly success: boolean;
+  readonly error: boolean;
   data: {
     accessToken: string;
   }
