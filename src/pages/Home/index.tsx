@@ -34,6 +34,7 @@ const Home = () => {
     if (request.email !== '' || request.password !== '' || request.name !== '') {
       try {
         dispatch(UserActions.signUpRequest(request))
+        toast.success('Cadastro realizado com sucesso. Faça o login para continuar')
       } catch (e) {
         console.log(e);
       }
