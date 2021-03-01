@@ -16,6 +16,14 @@ const useStyles = makeStyles((theme: any) => ({
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(12)
+  },
+  card: {
+    width: 400
+  },
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));
 
@@ -73,15 +81,16 @@ function NewTransaction() {
               xs={12}
             >
               <Card
+                className={classes.card}
               >
                 <CardHeader
-                  title="Cadastro"
+                  title="CADASTRO"
                   subheader="Cadastre uma nova transação"
                 />
                 <Divider />
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                   <Box
-                    height={350}
+                    height={300}
                     position="relative"
                   >
 
