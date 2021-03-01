@@ -17,9 +17,10 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         transactions: action.payload,
+        error: false,
       }
     case FinanceTypes.GET_TRANSACTION_FAILURE:
-      return { ...state, loading: false }
+      return { ...state, loading: false, error: false }
 
     case FinanceTypes.POST_TRANSACTION_REQUEST:
       return { ...state, loading: true }
@@ -28,6 +29,7 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         success: true,
+        error: false,
         data: action.payload
       }
     case FinanceTypes.POST_TRANSACTION_FAILURE:
@@ -39,6 +41,8 @@ const reducer: Reducer<any> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+        success: true,
+        error: false,
       }
     case FinanceTypes.DELETE_TRANSACTION_FAILURE:
       return { ...state, loading: false, error: true }
