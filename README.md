@@ -6,6 +6,15 @@ A aplicação permite realizar cadastro e login de usuário, acessar dashboard, 
 * API fake utilizada: <a href="https://github.com/jenicarvalho/fake-api-financeiro">fake-api-financeiro</a>
 
 <img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_signup.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_login.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_dashboard.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_currency.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_currency_select.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_currency_info.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_finance.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_finance_new.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_finance_success.png" width="50%" />
+<img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/efinance_list.png" width="50%" />
 
 ## Como usar
 
