@@ -31,11 +31,15 @@ const SignIn = () => {
       password: loginPassword.current?.value
     }
 
-    try {
-      dispatch(UserActions.loginRequest(request))
-      setAuthorized(true)
-    } catch (e) {
-      console.log(e)
+    if (request.email !== '' || request.password !== '') {
+      try {
+        dispatch(UserActions.loginRequest(request))
+        setAuthorized(true)
+      } catch (e) {
+        console.log(e)
+      }
+    } else {
+      toast.error('Preencha todos os campos!')
     }
   }
 

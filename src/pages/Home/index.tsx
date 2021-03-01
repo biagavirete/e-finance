@@ -32,19 +32,23 @@ const Home = () => {
       password: passwordInput?.current?.value
     }
 
-    try {
-      dispatch(UserActions.signUpRequest(request))
-      if (error) {
-        toast.error('Ocorreu um erro, tente novamente')
+    if (request.email !== '' || request.password !== '' || request.name !== '') {
+      try {
+        dispatch(UserActions.signUpRequest(request))
+        if (success) {
+          toast.success('Cadastro realizado. Faça o login para continuar')
+        }
+        if (error) {
+          toast.error('Cadastro não realizado. Verifique se todos os campos foram preenchidos.')
+        }
+      } catch (e) {
+        console.log(e);
       }
-
-      if (success) {
-        toast.success('Cadastro realizado. Faça o login para continuar')
-      }
-    } catch (e) {
-      console.log(e);
+    } else {
+      toast.error('Preencha todos os campos!')
     }
   }
+
 
   return (
     <div className={classes.root}>
