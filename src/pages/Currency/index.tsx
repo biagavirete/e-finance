@@ -20,17 +20,21 @@ import {
   MenuItem
 } from '@material-ui/core';
 import { ArrowLeft } from '@material-ui/icons';
+import { toast, Toaster } from 'react-hot-toast';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     height: '100%',
     paddingBottom: theme.spacing(12),
-    paddingTop: theme.spacing(12)
+    paddingTop: theme.spacing(12),
+  },
+  card: {
+    width: 800
   },
   item: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -55,6 +59,7 @@ function Currency() {
   }, [])
 
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
+
   const {
     currency_code,
     name,
@@ -62,6 +67,7 @@ function Currency() {
     symbol,
     country_code,
     central_bank } = useSelector((state: any) => state.currency.data)
+
   const currencyArray = Object.values(responseCurrency);
 
   const getSelectedCurrencyData = (param: any) => {
@@ -72,18 +78,22 @@ function Currency() {
       } catch (e) {
         console.log(e)
       }
+    } else {
+      toast.error('Selecione uma moeda')
+      return
     }
   }
 
   return (
     <>
+      <Toaster />
       <NavBar />
       <div className={classes.root}>
         <Container maxWidth="lg">
-          <Card>
+          <Card className={classes.card}>
             <CardHeader
               subheader="Selecione a moeda de sua preferência"
-              title="Moedas"
+              title="MOEDAS"
             />
             <Divider />
             <CardContent>
@@ -132,10 +142,10 @@ function Currency() {
             </Box>
           </Card>
           <Box mt={3}>
-            <Card>
+            <Card className={classes.card}>
               <CardHeader
                 subheader="Informações sobre a moeda selecionada"
-                title="Detalhes"
+                title="DETALHES"
               />
               <Divider />
               <CardContent>
@@ -165,7 +175,7 @@ function Currency() {
                   gutterBottom
                   variant="h5"
                 >
-                  Banco central - <a href={central_bank} >Clique aqui para visitar o site</a>
+                  Banco central - <a href={central_bank} >{central_bank}</a>
                 </Typography>
               </CardContent>
               <Divider />
