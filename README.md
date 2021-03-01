@@ -5,6 +5,8 @@ A aplicação permite realizar cadastro e login de usuário, acessar dashboard, 
 
 * API fake utilizada: <a href="https://github.com/jenicarvalho/fake-api-financeiro">fake-api-financeiro</a>
 
+<p align="center"><img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/gif-finance.gif" /></p>
+
 ## Como usar
 
 **Para instalar**
