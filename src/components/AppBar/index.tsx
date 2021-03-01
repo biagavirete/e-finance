@@ -29,7 +29,7 @@ export default function NavigationBar() {
         <Toolbar>
           <img src={Logo} alt="logo" width={40} height={40} />
           <Typography variant="h4" className={classes.title}>
-            e-Finances
+            e-Finance
           </Typography>
           <Button
             color="inherit"
