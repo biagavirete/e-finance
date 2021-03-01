@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as UserActions from '../../store/ducks/users/actions';
 import { Box, Button, Container, makeStyles, TextField, Typography } from '@material-ui/core';
@@ -22,7 +22,6 @@ const Home = () => {
   const passwordInput = useRef<HTMLInputElement>(null)
 
   const dispatch = useDispatch();
-  const { error, success } = useSelector((state: any) => state.users)
 
   const submitSignUp = async () => {
 
@@ -35,12 +34,6 @@ const Home = () => {
     if (request.email !== '' || request.password !== '' || request.name !== '') {
       try {
         dispatch(UserActions.signUpRequest(request))
-        if (success) {
-          toast.success('Cadastro realizado. Faça o login para continuar')
-        }
-        if (error) {
-          toast.error('Cadastro não realizado. Verifique se todos os campos foram preenchidos.')
-        }
       } catch (e) {
         console.log(e);
       }

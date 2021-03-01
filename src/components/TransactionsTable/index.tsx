@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as FinanceActions from '../../store/ducks/finances/actions';
-import { Icon, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transaction } from '../../store/ducks/finances/types';
-import toast from 'react-hot-toast';
+
+import { Icon, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Delete as DeleteIcon, Add, Remove } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: any) => ({
   table: {
@@ -29,7 +29,7 @@ function TransactionsTable() {
 
   const transactions = useSelector((state: any) => state.finance.transactions)
 
-  const { error, success } = useSelector((state: any) => state.finance)
+  // const { error, success } = useSelector((state: any) => state.finance)
 
   let transactionsArray: any[] | undefined = []
   Object.keys(transactions).forEach(function (item) {
@@ -37,26 +37,13 @@ function TransactionsTable() {
   })
 
   const deleteTransaction = (id: any) => {
-    setSelectedTransaction(id);
-    if (selectedTransaction !== '') {
-      try {
-        dispatch(FinanceActions.deleteTransactionsRequest(id))
-        if (error) {
-          toast.error('Não foi possível excluir o item')
-        }
-        if (success) {
-          dispatch(FinanceActions.getTransactionsRequest());
-        }
-      } catch (e) {
-        console.log(e)
-      }
-
+    try {
+      dispatch(FinanceActions.deleteTransactionsRequest(id))
+      dispatch(FinanceActions.getTransactionsRequest())
+    } catch (e) {
+      console.log(e)
     }
   }
-
-  useEffect(() => {
-    dispatch(FinanceActions.getTransactionsRequest());
-  }, [dispatch])
 
   return (
     <>
@@ -76,7 +63,7 @@ function TransactionsTable() {
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
-                <TableCell>{row.type}</TableCell>
+                <TableCell>{row.type === 'recebimento' ? <Add /> : <Remove />}</TableCell>
                 <TableCell>{row.amount}</TableCell>
                 <TableCell>
                   <Icon className={classes.icon} onClick={() => deleteTransaction((row.id))}><DeleteIcon /></Icon>

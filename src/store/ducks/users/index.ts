@@ -26,7 +26,7 @@ const reducer: Reducer<UserState> = (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, error: true }
 
     case UserTypes.POST_LOGIN_REQUEST:
-      return { ...state, loading: true }
+      return { ...state, loading: true, error: false }
     case UserTypes.POST_LOGIN_SUCCESS:
       return {
         ...state,

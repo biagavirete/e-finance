@@ -43,12 +43,6 @@ const SignIn = () => {
     }
   }
 
-  const { error } = useSelector((state: any) => state.users);
-
-  if (error) {
-    toast.error('Não foi possível realizar o login')
-  }
-
   return (
     <div className={classes.root}>
       <Toaster />
