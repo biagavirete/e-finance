@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as CurrencyActions from '../../store/ducks/currency/actions';
 import NavBar from '../../components/NavBar';
-import { Link as RouterLink, } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -11,7 +10,6 @@ import {
   CardHeader,
   Divider,
   Grid,
-  Typography,
   makeStyles,
   Container,
   InputLabel,
@@ -19,8 +17,8 @@ import {
   FormControl,
   MenuItem
 } from '@material-ui/core';
-import { ArrowLeft } from '@material-ui/icons';
 import { toast, Toaster } from 'react-hot-toast';
+import CurrencyDetails from '../../components/CurrencyDetails';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -46,6 +44,7 @@ function Currency() {
   const classes = useStyles();
 
   const [selectedCurrency, setSelectedCurrency] = useState('');
+  const [showCurrencyDetails, setShowCurrencyDetails] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedCurrency((event.target as HTMLInputElement).value);
@@ -60,23 +59,16 @@ function Currency() {
 
   const responseCurrency = useSelector((state: any) => state.currency.currenciesList);
 
-  const {
-    currency_code,
-    name,
-    country_name,
-    symbol,
-    country_code,
-    central_bank } = useSelector((state: any) => state.currency.data)
-
   const currencyArray = Object.values(responseCurrency);
 
   const getSelectedCurrencyData = (param: any) => {
     setSelectedCurrency(param);
     if (selectedCurrency !== '') {
       try {
-        dispatch(CurrencyActions.loadCurrencyRequest(selectedCurrency))
+        dispatch(CurrencyActions.loadCurrencyRequest(selectedCurrency));
+        setShowCurrencyDetails(true);
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     } else {
       toast.error('Selecione uma moeda')
@@ -141,63 +133,8 @@ function Currency() {
           </Button>
             </Box>
           </Card>
-          <Box mt={3}>
-            <Card className={classes.card}>
-              <CardHeader
-                subheader="Informações sobre a moeda selecionada"
-                title="DETALHES"
-              />
-              <Divider />
-              <CardContent>
-                <Typography
-                  color="textPrimary"
-                  gutterBottom
-                  variant="h4"
-                >
-                  Moeda: {name} - {currency_code}
-                </Typography>
-                <Typography
-                  color="textPrimary"
-                  gutterBottom
-                  variant="h5"
-                >
-                  País: {country_name} ({country_code})
-                </Typography>
-                <Typography
-                  color="textPrimary"
-                  gutterBottom
-                  variant="h5"
-                >
-                  Símbolo: {symbol}
-                </Typography>
-                <Typography
-                  color="textPrimary"
-                  gutterBottom
-                  variant="h5"
-                >
-                  Banco central - <a href={central_bank} >{central_bank}</a>
-                </Typography>
-              </CardContent>
-              <Divider />
-              <Box
-                display="flex"
-                justifyContent="flex-end"
-                p={2}
-              >
-                <Button
-                  color="primary"
-                  startIcon={<ArrowLeft />}
-                  size="small"
-                  variant="text"
-                  component={RouterLink}
-                  to="/dashboard"
-                >
-                  Voltar para o dashboard
-                  </Button>
 
-              </Box>
-            </Card>
-          </Box>
+          {showCurrencyDetails ? <CurrencyDetails /> : null}
         </Container>
 
       </div>
