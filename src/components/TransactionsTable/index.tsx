@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as FinanceActions from '../../store/ducks/finances/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transaction } from '../../store/ducks/finances/types';
@@ -18,8 +18,6 @@ const useStyles = makeStyles((theme: any) => ({
 function TransactionsTable() {
   const classes = useStyles();
 
-  const [selectedTransaction, setSelectedTransaction] = useState('');
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,13 +26,6 @@ function TransactionsTable() {
   }, [])
 
   const transactions = useSelector((state: any) => state.finance.transactions)
-
-  // const { error, success } = useSelector((state: any) => state.finance)
-
-  let transactionsArray: any[] | undefined = []
-  Object.keys(transactions).forEach(function (item) {
-    transactionsArray?.push(transactions[item]);
-  })
 
   const deleteTransaction = (id: any) => {
     try {
@@ -58,8 +49,8 @@ function TransactionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactionsArray.map((row: Transaction, key: any) => (
-              <TableRow key={key}>
+            {transactions.map((row: Transaction) => (
+              <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.id}
                 </TableCell>
