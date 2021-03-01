@@ -1,12 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as FinanceActions from '../../store/ducks/finances/actions';
-
 import { Box, Button, Card, CardContent, FormControl, FormControlLabel, makeStyles, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
-
 import { toast, Toaster } from 'react-hot-toast';
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles(() => ({
   card: {
     width: 400
   },
