@@ -40,7 +40,7 @@ function TransactionsTable() {
     setSelectedTransaction(id);
     if (selectedTransaction !== '') {
       try {
-        dispatch(FinanceActions.deleteTransactionsRequest(selectedTransaction))
+        dispatch(FinanceActions.deleteTransactionsRequest(id))
         if (error) {
           toast.error('Não foi possível excluir o item')
         }
@@ -79,7 +79,7 @@ function TransactionsTable() {
                 <TableCell>{row.type}</TableCell>
                 <TableCell>{row.amount}</TableCell>
                 <TableCell>
-                  <Icon className={classes.icon} onClick={() => deleteTransaction(String(row.id))}><DeleteIcon /></Icon>
+                  <Icon className={classes.icon} onClick={() => deleteTransaction((row.id))}><DeleteIcon /></Icon>
                 </TableCell>
               </TableRow>
             ))}
