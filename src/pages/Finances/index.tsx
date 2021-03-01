@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles, Typography } from '@material-ui/core';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import { Add, List } from '@material-ui/icons';
 import NavBar from '../../components/NavBar';
 import { Link as RouterLink, } from 'react-router-dom';
+import NewTransaction from '../../components/NewTransaction';
+import TransactionsTable from '../../components/TransactionsTable';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -13,12 +15,34 @@ const useStyles = makeStyles((theme: any) => ({
     paddingTop: theme.spacing(12)
   },
   card: {
-    width: 800
+    width: 1000
   },
 }));
 
 function Finances() {
   const classes = useStyles();
+
+  const [openNewTransaction, setOpenNewTransaction] = useState(false);
+  const [openTransactionsTable, setOpenTransactionsTable] = useState(false);
+
+
+  const toggleNewTransaction = () => {
+    if (openTransactionsTable) {
+      setOpenTransactionsTable(false);
+      setOpenNewTransaction(true);
+    } else {
+      setOpenNewTransaction(!openNewTransaction);
+    }
+  }
+
+  const toggleTransactionsTable = () => {
+    if (openNewTransaction) {
+      setOpenNewTransaction(false);
+      setOpenTransactionsTable(true);
+    } else {
+      setOpenTransactionsTable(!openTransactionsTable);
+    }
+  }
 
   return (
     <>
@@ -61,8 +85,9 @@ function Finances() {
                       startIcon={<Add />}
                       size="large"
                       variant="text"
-                      component={RouterLink}
-                      to="/newtransaction"
+                      onClick={toggleNewTransaction}
+                    // component={RouterLink}
+                    // to="/newtransaction"
                     >
                       Cadastrar
                   </Button>
@@ -71,12 +96,13 @@ function Finances() {
                       startIcon={<List />}
                       size="large"
                       variant="text"
-                      component={RouterLink}
-                      to="/transactionslist"
+                      onClick={toggleTransactionsTable}
                     >
                       Listar
                   </Button>
                   </Box>
+                  {openNewTransaction ? <NewTransaction /> : null}
+                  {openTransactionsTable ? <TransactionsTable /> : null}
                 </CardContent>
                 <Divider />
                 <Box
