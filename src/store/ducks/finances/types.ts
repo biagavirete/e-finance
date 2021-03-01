@@ -15,6 +15,7 @@ export enum FinanceTypes {
 export interface Transaction {
   type: string;
   amount: string;
+  id: number;
 }
 
 export interface FinanceState {
