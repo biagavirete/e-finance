@@ -6,6 +6,7 @@ import NavBar from '../NavBar';
 import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles, Typography } from '@material-ui/core';
 import { ArrowLeft as ArrowLeftIcon, Delete as DeleteIcon } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { Transaction } from '../../store/ducks/finances/types';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -28,33 +29,30 @@ function TransactionsTable() {
 
   useEffect(() => {
     dispatch(FinanceActions.getTransactionsRequest());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const transactions = useSelector((state: any) => state.finance.transactions)
 
   console.log('transactions', transactions)
 
-  const teste = 2;
-
-  let transactionsList: any[] = []
-
-  Object.keys(transactions).forEach(function (key) {
-    transactionsList.push(transactions[key]);
+  let transactionsArray: any[] | undefined = []
+  Object.keys(transactions).forEach(function (item) {
+    transactionsArray?.push(transactions[item]);
   })
-
-  console.log('transactions list', transactionsList)
-  console.log(selectedTransaction)
 
   const deleteTransaction = (id: any) => {
     setSelectedTransaction(id);
     console.log('selected transaction', selectedTransaction)
+    if (selectedTransaction !== '') {
     try {
       dispatch(FinanceActions.deleteTransactionsRequest(selectedTransaction))
     } catch (e) {
       console.log(e)
     }
-  }
 
+    }
+  }
 
   return (
     <>
@@ -93,16 +91,18 @@ function TransactionsTable() {
                         variant="h5"
                       >
                         Transações
-                </Typography>
-                      <Typography
-                        color="textPrimary"
-                        gutterBottom
-                        variant="h5"
-                      >
-                        Teste delete
-                        <p onClick={() => deleteTransaction(teste)}><DeleteIcon /></p>
+                        </Typography>
 
-                      </Typography>
+                      {transactionsArray !== undefined && transactionsArray.map((item: Transaction, key: any) => (
+                        <div className="itens-div" key={key}>
+                          <p>ID: {item.id}</p>
+                          <p>Valor: {item.amount}</p>
+                          <p>Tipo: {item.type}</p>
+                          <p onClick={() => deleteTransaction(String(item.id))}><DeleteIcon /></p>
+                        </div>
+                      ))}
+
+
                     </Box>
                   </Box>
                 </CardContent>
