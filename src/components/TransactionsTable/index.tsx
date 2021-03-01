@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import * as FinanceActions from '../../store/ducks/finances/actions';
 
 import NavBar from '../NavBar';
-import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardHeader, Container, Divider, Grid, Icon, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
 import { ArrowLeft as ArrowLeftIcon, Delete as DeleteIcon } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Transaction } from '../../store/ducks/finances/types';
@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: any) => ({
   table: {
     minWidth: 650,
   },
+  icon: {
+    cursor: 'pointer'
+  }
 }));
 
 function TransactionsTable() {
@@ -45,14 +48,17 @@ function TransactionsTable() {
     setSelectedTransaction(id);
     console.log('selected transaction', selectedTransaction)
     if (selectedTransaction !== '') {
-    try {
-      dispatch(FinanceActions.deleteTransactionsRequest(selectedTransaction))
-    } catch (e) {
-      console.log(e)
-    }
-
+      try {
+        dispatch(FinanceActions.deleteTransactionsRequest(selectedTransaction))
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
+
+  useEffect(() => {
+    dispatch(FinanceActions.getTransactionsRequest());
+  }, [dispatch])
 
   return (
     <>
@@ -73,38 +79,35 @@ function TransactionsTable() {
               <Card
               >
                 <CardHeader
-                  title="Lista de transações"
+                  title="LISTA DE TRANSAÇÕES"
                   subheader="Veja as transações cadastradas"
                 />
                 <Divider />
                 <CardContent>
-                  <Box
-                    height={350}
-                    position="relative"
-                  >
-                    <Box
-                      p={2}
-                    >
-                      <Typography
-                        color="textPrimary"
-                        gutterBottom
-                        variant="h5"
-                      >
-                        Transações
-                        </Typography>
-
-                      {transactionsArray !== undefined && transactionsArray.map((item: Transaction, key: any) => (
-                        <div className="itens-div" key={key}>
-                          <p>ID: {item.id}</p>
-                          <p>Valor: {item.amount}</p>
-                          <p>Tipo: {item.type}</p>
-                          <p onClick={() => deleteTransaction(String(item.id))}><DeleteIcon /></p>
-                        </div>
-                      ))}
-
-
-                    </Box>
-                  </Box>
+                  <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>ID</TableCell>
+                          <TableCell>Tipo</TableCell>
+                          <TableCell>Valor</TableCell>
+                          <TableCell>Excluir</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {transactionsArray.map((row: Transaction, key: any) => (
+                          <TableRow key={key}>
+                            <TableCell component="th" scope="row">
+                              {row.id}
+                            </TableCell>
+                            <TableCell>{row.type}</TableCell>
+                            <TableCell>{row.amount}</TableCell>
+                            <TableCell><Icon className={classes.icon} onClick={() => deleteTransaction(String(row.id))}><DeleteIcon /></Icon></TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </CardContent>
                 <Divider />
                 <Box
