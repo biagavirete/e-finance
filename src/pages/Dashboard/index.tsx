@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme: any) => ({
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(12)
-  }
+  },
+  card: {
+    width: 800
+  },
 }));
 
 function Dashboard() {
@@ -33,9 +36,10 @@ function Dashboard() {
               xs={12}
             >
               <Card
+                className={classes.card}
               >
                 <CardHeader
-                  title="Dashboard"
+                  title="DASHBOARD"
                 />
                 <Divider />
                 <CardContent>

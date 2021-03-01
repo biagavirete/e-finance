@@ -11,7 +11,10 @@ const useStyles = makeStyles((theme: any) => ({
     minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(12)
-  }
+  },
+  card: {
+    width: 800
+  },
 }));
 
 function Finances() {
@@ -34,9 +37,10 @@ function Finances() {
               xs={12}
             >
               <Card
+                className={classes.card}
               >
                 <CardHeader
-                  title="Finanças"
+                  title="FINANÇAS"
                   subheader="Administre suas finanças"
                 />
                 <Divider />
