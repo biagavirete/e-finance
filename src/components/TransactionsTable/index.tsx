@@ -30,10 +30,10 @@ function TransactionsTable() {
   const deleteTransaction = (id: any) => {
     try {
       dispatch(FinanceActions.deleteTransactionsRequest(id))
-      dispatch(FinanceActions.getTransactionsRequest())
     } catch (e) {
       console.log(e)
     }
+    dispatch(FinanceActions.getTransactionsRequest())
   }
 
   return (
