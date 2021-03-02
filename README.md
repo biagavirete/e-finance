@@ -36,7 +36,7 @@ $  yarn start
 
 ```bash
 $ git clone https://github.com/jenicarvalho/fake-api-financeiro.git
-$ cd fake-api-emporio
+$ cd fake-api-financeiro
 ```
 
 > Instalar dependências
