@@ -1,57 +1,57 @@
 # Projeto e-Finance
 
-Projeto React utilizando Typescript, Redux, Redux-Saga e Material-UI desenvolvido na trilha React do Campinas Tech Talents.
-A aplicação permite realizar cadastro e login de usuário, acessar dashboard, pesquisar por moedas, além de cadastrar, excluir e listar transações (despesas e recebimentos), utilizando uma API fake.
+React project using Typescript, Redux, Redux-Saga and Material-UI framework, developed during Campinas Tech Talents bootcamp.
+The application allows users to sign up and login, access dashboard, search for different currencies, and also add, delete and list transactions (expenses and income), using a fake API.
 
-* API fake utilizada: <a href="https://github.com/jenicarvalho/fake-api-financeiro">fake-api-financeiro</a>
+* Fake API used: <a href="https://github.com/jenicarvalho/fake-api-financeiro">fake-api-financeiro</a>
 
 <p align="center"><img src="https://github.com/biagavirete/e-finance/blob/master/src/assets/gif2-finance.gif" /></p>
 
-## Como usar
+## Getting started
 
-**Para instalar**
-> Clonar o repositório
+**Installing**
+> Cloning the repository
 
 ```bash
 $ git clone https://github.com/biagavirete/e-finance.git
 $ cd e-finance
 ```
 
-**Para rodar**
-> Instalar dependências
+**Running**
+> Installing dependencies
 
 ```bash
 $ yarn
 ```
 
-> Iniciar o React
+> Running React
 
 ```bash
 $  yarn start
 ```
 
-**Utilizando a API fake**
+**Running fake API**
 
-> Clonar o repositório com a API fake
+> Cloning fake API repository:
 
 ```bash
 $ git clone https://github.com/jenicarvalho/fake-api-financeiro.git
 $ cd fake-api-financeiro
 ```
 
-> Instalar dependências
+> Installing dependencies
 
 ```bash
 $ yarn
 ```
 
-> Iniciando o servidor fake
+> Running fake server
 
 ```bash
 $ json-server db.json -m ./node_modules/json-server-auth -r routes.json --port 4000
 ```
 
-## Desenvolvido com
+## Built with
 
 * Typescript
 * React
